@@ -1,30 +1,17 @@
-﻿========================================================================
-    控制台应用程序：MyDBMS2 项目概述
-========================================================================
-
-应用程序向导已为您创建了此 MyDBMS2 应用程序。
-
-本文件概要介绍组成 MyDBMS2 应用程序的每个文件的内容。
-
-
-MyDBMS2.vcxproj
-    这是使用应用程序向导生成的 VC++ 项目的主项目文件，其中包含生成该文件的 Visual C++ 的版本信息，以及有关使用应用程序向导选择的平台、配置和项目功能的信息。
-
-MyDBMS2.vcxproj.filters
-    这是使用“应用程序向导”生成的 VC++ 项目筛选器文件。它包含有关项目文件与筛选器之间的关联信息。在 IDE 中，通过这种关联，在特定节点下以分组形式显示具有相似扩展名的文件。例如，“.cpp”文件与“源文件”筛选器关联。
-
-MyDBMS2.cpp
-    这是主应用程序源文件。
-
-/////////////////////////////////////////////////////////////////////////////
-其他标准文件:
-
-StdAfx.h, StdAfx.cpp
-    这些文件用于生成名为 MyDBMS2.pch 的预编译头 (PCH) 文件和名为 StdAfx.obj 的预编译类型文件。
-
-/////////////////////////////////////////////////////////////////////////////
-其他注释:
-
-应用程序向导使用“TODO:”注释来指示应添加或自定义的源代码部分。
-
-/////////////////////////////////////////////////////////////////////////////
+This course project is to design and implement a simple SQL (called Tiny-SQL) interpreter.
+The grammar for Tiny-SQL is given in Appendix 1. Your interpreter should accept SQL queries that are valid in terms of the grammar of Tiny-SQL, execute the queries, and output the results of the execution.
+Your interpreter should include the following components:
+• A parser: the parser accepts the input Tiny-SQL query and converts it into a parse tree.
+• A logical query plan generator: the logical query plan generator converts a parse tree into a logical query plan. This phase also includes any possible logical query plan optimization.
+• A physical query plan generator: this generator converts an optimized logical query plan into an executable physical query plan. This phase also includes any possible physical query plan optimization.
+• A set of subroutines that implement a variety of data query operations necessary for execution of queries in Tiny-SQL. The subroutines should use the released library StorageManager, which simulates computer disks and memory.
+The StorageManager library is provided to support physical execution of the Tiny-SQL inter- preter. The library simulates a fictitious disk containing 100 tracks of unlimited length and a small fictitious (main) memory of 10 data blocks. The StorageManager is configured to simulate the speed of 50M memory and a 300M relation on a Megatron 747 disk when the memory capacity is 10 blocks and the relation holds 60 tuples. With the hardware limit, the Tiny-SQL interpreter must be implemented wisely using query plans and algorithms. Otherwise, it will not be possible to handle small data such as two relations of 60 tuples or six relations of only 5 tuples.
+Further descriptions of the library are given in Appendix 2. Specific instructions and requirements of the project are as follows.
+• Interface: Your Tiny-SQL interpreter should have an interface. Single-user text-based inter- face is su cient. The interface accepts one Tiny-SQL statement at a line. In addition, the interface should be able to read a file containing many Tiny-SQL statements, one statement per line, and be able to output the query results to a file.
+1
+• Parser: You can develop the parser either by writing your own procedures (which should be feasible because Tiny-SQL has a very simple grammar) or by using a parser generator such as LEX, YACC, and JavaCC, if you are familiar with them. We would recommend that you write your own parser, in particular for students who do not have extensive experience in compiler constructions.
+Please make sure that you follow the TinySQL grammar. Be careful to allow space between words, and do not allow a semicolon at the end of a statement.
+• Logical query plan generator: You will need a tree data structure. You should at least optimize the selection operations in the tree.
+• Physical query plan generator: You should at least optimize the join operations.
+• Implementation of physical operators: You should implement the one-pass algorithms for projection, selection, product, join, duplicate elimination, and sorting as well as the two-pass algorithms for join, duplicate elimination, and sorting.
+Hints: (1) Based on the StorageManager, you can use at most 10 memory blocks; (2) Among the join operations, cross-join is easier to implement but will not work for large relations; and (3) To handle WHERE conditions, it is suggested that you do not further decompose the condition into a subtree. Instead, keep the entire condition as a single node in your parse tree.
